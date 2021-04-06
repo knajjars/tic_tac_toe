@@ -79,6 +79,7 @@ GEM
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
+    libv8 (8.4.255.0-x86_64-darwin-20)
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -90,6 +91,8 @@ GEM
     marcel (1.0.1)
     method_source (1.0.0)
     mini_mime (1.0.3)
+    mini_racer (0.3.1)
+      libv8 (~> 8.4.255)
     minitest (5.14.4)
     msgpack (1.4.2)
     nio4r (2.5.7)
@@ -194,6 +197,7 @@ DEPENDENCIES
   byebug
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  mini_racer
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
