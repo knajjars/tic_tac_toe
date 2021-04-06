@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :games
-  root to: 'menu#index'
+  root to: 'games#index'
 end
