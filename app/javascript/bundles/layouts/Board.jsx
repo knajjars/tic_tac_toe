@@ -13,23 +13,26 @@ const style = {
   gridTemplate: 'repeat(3, 1fr) / repeat(3, 1fr)',
 };
 
-class Board = ({ value, user, game_id }) => {
+const Board = ({ value, user, game_id, player }) => {
   const [name, setName] = useState('');
-  const onClick = async () => {
-
-    await axios.post(`/games/${game_id}/make_move`);
+  const onClick = (position) => async (e) => {
+    e.preventDefault();
+    const token = document.querySelector('[name=csrf-token]').content;
+    axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
+    await axios.post(`/games/${game_id}/make_move`, { player, position });
   };
+
   return (
     <div style={style}>
-      <Square value={value} position={[0, 0]} onClick={onClick} />
-      <Square value={value} position={[0, 1]} onClick={onClick} />
-      <Square value={value} position={[0, 2]} onClick={onClick} />
-      <Square value={value} position={[1, 0]} onClick={onClick} />
-      <Square value={value} position={[1, 1]} onClick={onClick} />
-      <Square value={value} position={[1, 2]} onClick={onClick} />
-      <Square value={value} position={[2, 0]} onClick={onClick} />
-      <Square value={value} position={[2, 1]} onClick={onClick} />
-      <Square value={value} position={[2, 2]} onClick={onClick} />
+      <Square value={value} onClick={onClick([0, 0])} />
+      <Square value={value} onClick={onClick([0, 1])} />
+      <Square value={value} onClick={onClick([0, 2])} />
+      <Square value={value} onClick={onClick([1, 0])} />
+      <Square value={value} onClick={onClick([1, 1])} />
+      <Square value={value} onClick={onClick([1, 2])} />
+      <Square value={value} onClick={onClick([2, 0])} />
+      <Square value={value} onClick={onClick([2, 1])} />
+      <Square value={value} onClick={onClick([2, 2])} />
     </div>
   );
 };

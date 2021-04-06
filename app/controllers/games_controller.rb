@@ -1,6 +1,7 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_game, only: %i[show join play make_move]
+  before_action :set_player, only: %i[play make_move]
 
   def index
     @games = Game.all
@@ -45,7 +46,7 @@ class GamesController < ApplicationController
     @game.player_move player: player, position: position
 
     respond_to do |format|
-      format.json { render json: @board }
+      format.json { render json: @game }
     end
   end
 
@@ -57,5 +58,11 @@ class GamesController < ApplicationController
 
   def game_params
     params.require(:game).permit(:name, :password, :host_wins, :guest_wins)
+  end
+
+  def set_player
+    return @player = 'host' if current_user == @game.host
+
+    @player = 'guest' if current_user == @game.guest
   end
 end

@@ -10,5 +10,6 @@ class Game < ApplicationRecord
   def player_move(player:, position:)
     guest_moves << position if player == 'guest'
     host_moves << position if player == 'host'
+    save!
   end
 end
