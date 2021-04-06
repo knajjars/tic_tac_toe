@@ -18,12 +18,12 @@ ActiveRecord::Schema.define(version: 2021_04_06_173957) do
   create_table "games", force: :cascade do |t|
     t.string "name"
     t.string "password"
-    t.integer "host_wins"
-    t.integer "guest_wins"
+    t.integer "host_wins", default: 0
+    t.integer "guest_wins", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "host_id", null: false
-    t.bigint "guest_id", null: false
+    t.bigint "guest_id"
+    t.bigint "host_id"
     t.index ["guest_id"], name: "index_games_on_guest_id"
     t.index ["host_id"], name: "index_games_on_host_id"
   end

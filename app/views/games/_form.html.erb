@@ -11,37 +11,7 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
 
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.text_field :password %>
-  </div>
+<%= react_component 'GameForm', { game: @game } %>
 
-  <div class="field">
-    <%= form.label :host_id %>
-    <%= form.text_field :host_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :guest_id %>
-    <%= form.text_field :guest_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :host_wins %>
-    <%= form.number_field :host_wins %>
-  </div>
-
-  <div class="field">
-    <%= form.label :guest_wins %>
-    <%= form.number_field :guest_wins %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

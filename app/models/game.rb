@@ -1,4 +1,7 @@
 class Game < ApplicationRecord
-  belongs_to :host
-  belongs_to :guest
+  belongs_to :host, class_name: 'User', foreign_key: 'host_id'
+  belongs_to :guest, class_name: 'User', foreign_key: 'guest_id'
+
+  validates :name, presence: true
+  validates :password, presence: true
 end

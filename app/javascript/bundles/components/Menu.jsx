@@ -10,7 +10,7 @@ const Menu = (props) => {
       <hr />
       <form>
         <label htmlFor="name">
-          Say hello to:
+          Enter your name
           <input
             id="name"
             type="text"
