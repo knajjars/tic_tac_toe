@@ -4,4 +4,11 @@ class Game < ApplicationRecord
 
   validates :name, presence: true
   validates :password, presence: true
+
+  enum status: %i[settled in_progress]
+
+  def player_move(player:, position:)
+    guest_moves << position if player == 'guest'
+    host_moves << position if player == 'host'
+  end
 end

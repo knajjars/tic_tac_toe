@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 import Square from '../components/tic_tac_toe/Square';
 
@@ -12,21 +13,23 @@ const style = {
   gridTemplate: 'repeat(3, 1fr) / repeat(3, 1fr)',
 };
 
-const Board = ({ value }) => {
+class Board = ({ value, user, game_id }) => {
   const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
+  const onClick = async () => {
 
+    await axios.post(`/games/${game_id}/make_move`);
+  };
   return (
     <div style={style}>
-      <Square value={1} />
-      <Square value={2} />
-      <Square value={3} />
-      <Square value={4} />
-      <Square value={5} />
-      <Square value={6} />
-      <Square value={7} />
-      <Square value={8} />
-      <Square value={9} />
+      <Square value={value} position={[0, 0]} onClick={onClick} />
+      <Square value={value} position={[0, 1]} onClick={onClick} />
+      <Square value={value} position={[0, 2]} onClick={onClick} />
+      <Square value={value} position={[1, 0]} onClick={onClick} />
+      <Square value={value} position={[1, 1]} onClick={onClick} />
+      <Square value={value} position={[1, 2]} onClick={onClick} />
+      <Square value={value} position={[2, 0]} onClick={onClick} />
+      <Square value={value} position={[2, 1]} onClick={onClick} />
+      <Square value={value} position={[2, 2]} onClick={onClick} />
     </div>
   );
 };
