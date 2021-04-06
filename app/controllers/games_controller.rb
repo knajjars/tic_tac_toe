@@ -46,7 +46,11 @@ class GamesController < ApplicationController
     @game.player_move player: player, position: position
 
     respond_to do |format|
-      format.json { render json: @game }
+      format.json do
+        render json: @game.as_json(
+          except: [:password]
+        )
+      end
     end
   end
 
@@ -57,7 +61,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:name, :password, :host_wins, :guest_wins)
+    params.require(:game).permit(:name, :password)
   end
 
   def set_player
