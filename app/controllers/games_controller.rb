@@ -30,13 +30,13 @@ class GamesController < ApplicationController
 
     return redirect_to @game, alert: 'Wrong password.' if provided_password != @game.password
 
+    @game.guest = current_user
+    @game.save
+
     redirect_to play_game_path(@game)
   end
 
-  def play
-    @game.guest = current_user
-    @game.save
-  end
+  def play; end
 
   private
 

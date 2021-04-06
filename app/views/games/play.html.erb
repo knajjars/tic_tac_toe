@@ -1,1 +1,5 @@
-Play!
+<div>
+  <% (1..9).to_a.each do |value| %>
+    <%= react_component 'TicTacToeSquare', props: { value: value } %>
+  <% end %>
+</div>

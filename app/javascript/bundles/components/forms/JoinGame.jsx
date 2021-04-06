@@ -1,7 +1,6 @@
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-const GameForm = (props) => {
+const JoinGame = (props) => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
 
@@ -20,4 +19,4 @@ const GameForm = (props) => {
   );
 };
 
-export default GameForm;
+export default JoinGame;
