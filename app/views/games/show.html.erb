@@ -1,0 +1,6 @@
+<%= form_with url: join_game_path(@game), method: :post do |form| %>
+  <h1>Join <%= @game.name %></h1>
+
+  <%= react_component 'JoinGame', props: { name: @game.name }, prerender: true %>
+
+<% end %>

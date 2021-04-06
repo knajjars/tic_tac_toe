@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_game, only: %i[show join play]
 
   def index
     @games = Game.all
@@ -22,6 +23,19 @@ class GamesController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
       end
     end
+  end
+
+  def join
+    provided_password = params.require(:password)
+
+    return redirect_to @game, alert: 'Wrong password.' if provided_password != @game.password
+
+    redirect_to play_game_path(@game)
+  end
+
+  def play
+    @game.guest = current_user
+    @game.save
   end
 
   private
