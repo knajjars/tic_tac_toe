@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  get 'hello_world', to: 'menu#index'
+  devise_for :users
+  resources :games
+  root to: 'menu#index'
 end

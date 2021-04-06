@@ -1,7 +1,7 @@
 class MenuController < ApplicationController
-  layout "application"
+  layout 'application'
 
   def index
-    @hello_world_props = { name: 'Stranger' }
+    redirect_to new_game_path if user_signed_in?
   end
 end
