@@ -7,6 +7,12 @@ class Game < ApplicationRecord
   validates :name, presence: true
   enum status: %i[settled in_progress]
 
+  after_commit :notify_game_session
+
+  def notify_game_session
+    ActionCable.server.broadcast "game_session_channel_#{id}", self
+  end
+
   def player_move(player:, position:)
     return unless can_make_move?(position)
 
