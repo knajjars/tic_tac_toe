@@ -52,3 +52,5 @@ gem 'mini_racer', platforms: :ruby
 gem 'react_on_rails', '= 12.2'
 
 gem 'devise', '~> 4.7'
+gem 'devise-bootstrap-views', '~> 1.1'
+gem 'devise-i18n', '~> 1.9'

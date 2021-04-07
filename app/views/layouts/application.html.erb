@@ -2,13 +2,17 @@
 <html>
   <head>
     <title>TicTacToe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= csrf_meta_tags %>
     <%= javascript_pack_tag 'react-bundle' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <%= render 'shared/flash' %>
     <%= render 'shared/navbar' %>
-    <%= yield %>
+    <div class="container my-4">
+      <%= yield %>
+    </div>
   </body>
 </html>
