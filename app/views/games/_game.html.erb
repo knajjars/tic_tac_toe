@@ -1,0 +1,8 @@
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= game.name %></h5>
+    <p class="card-text">Host wins: <%= game.host_wins %></p>
+    <p class="card-text">Guest wins: <%= game.guest_wins %></p>
+    <%= link_to 'Join', join_game_path(game), class: "btn btn-success" %>
+  </div>
+</div>

@@ -33,6 +33,6 @@ module GameConcern
 
       game_finished = true if host_won || guest_won || (guest_moves.length + host_moves.length >= 9)
     end
-    { game_finished: game_finished, guest: guest, host: host }
+    { game_finished: game_finished, guest_won: guest_won, host_won: host_won }
   end
 end

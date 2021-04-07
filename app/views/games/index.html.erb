@@ -4,16 +4,11 @@
   <div class="row">
     <% group.each do |game| %>
       <div class="col-sm-4">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title"><%= game.name %></h5>
-            <%= link_to 'Join', join_game_path(game), class: "btn btn-primary" %>
-          </div>
-        </div>
+        <%= render game %>
       </div>
     <% end %>
   </div>
 <% end %>
 <br>
 
-<%= link_to 'New Game', new_game_path %>
+<%= link_to 'New Game', new_game_path, class: "btn btn-primary" %>

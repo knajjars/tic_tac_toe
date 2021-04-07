@@ -6,12 +6,13 @@ import Square from '../components/game/Square';
 import Score from '../components/game/Score';
 import GameSessionChannel from '../../channels/game_session_channel';
 import { squaresSettings, gameSettings } from '../../libs/game';
+import { eventEmitter } from '../../libs/event';
 
 const style = {
   border: '4px solid darkblue',
   borderRadius: '10px',
-  width: '250px',
-  height: '250px',
+  width: '350px',
+  height: '350px',
   margin: '0 auto',
   display: 'grid',
   gridTemplate: 'repeat(3, 1fr) / repeat(3, 1fr)',
@@ -30,7 +31,12 @@ const Board = ({ value, user, game_id, player, game }) => {
 
   useEffect(() => {
     GameSessionChannel(game_id).received = (data) => {
-      setGameStats(data);
+      let prevGameStats;
+      setGameStats((prevState) => {
+        prevGameStats = prevState;
+        return data;
+      });
+      eventEmitter.emit('analyzeWinner', { data, gameStats: prevGameStats });
     };
   }, []);
 
@@ -68,6 +74,7 @@ const Board = ({ value, user, game_id, player, game }) => {
       <Score
         guest_wins={gameStats.guest_wins}
         host_wins={gameStats.host_wins}
+        player={player}
       />
       <div style={style}>
         {squares.map((square) => (

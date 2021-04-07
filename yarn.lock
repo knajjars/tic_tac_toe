@@ -6192,6 +6192,11 @@ react-on-rails@12.2.0:
     "@babel/runtime-corejs3" "^7.12.5"
     concurrently "^5.1.0"
 
+react-simple-toasts@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-simple-toasts/-/react-simple-toasts-1.1.2.tgz#c11e6a14519b898d15036fd8bbdb801e508ea82c"
+  integrity sha512-yCnGOZBnwf4V6lUQ2GnvnN2cxkIBwZx6xgG6LeWTSUJ5x/m87XmmljdeiSJCzaqfBg9Yzr/s3d0XUX2R+08B5g==
+
 react@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
