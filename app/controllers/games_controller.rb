@@ -34,7 +34,9 @@ class GamesController < ApplicationController
     redirect_to play_game_path(@game)
   end
 
-  def play; end
+  def play
+    redirect_to join_game_path(@game) unless current_user.game_host?(@game) || current_user.game_guest?(@game)
+  end
 
   def make_move
     position = params.require(:position)

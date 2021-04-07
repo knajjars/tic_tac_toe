@@ -2,7 +2,7 @@
   <div class="container">
     <%= link_to 'Home', games_path, class: "navbar-brand" %>
     <% if user_signed_in? %>
-        <%= button_to "Log out", destroy_user_session_path, method: 'delete', class: "nav-link btn btn-secondary" %>
+        <%= button_to "Log out", destroy_user_session_path, method: 'delete', class: "btn btn-secondary" %>
     <% end %>
   </div>
 </nav>
