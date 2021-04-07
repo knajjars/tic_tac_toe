@@ -1,4 +1,3 @@
 <div>
-    <%= react_component 'Score', props: {contrary_wins: @contrary_wins, contrary_name: @contrary_name, user_wins: @user_wins} %>
-    <%= react_component 'Board', props: {user: current_user, game_id: @game.id, player: @player}, prerender: true %>
+    <%= react_component 'Board', props: {user: current_user, game_id: @game.id, player: @player, guest_wins: @game.guest_wins, host_wins: @game.host_wins}, prerender: true %>
 </div>

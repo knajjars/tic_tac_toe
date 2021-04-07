@@ -37,11 +37,7 @@ class GamesController < ApplicationController
     redirect_to play_game_path(@game)
   end
 
-  def play
-    @contrary_name = current_user.game_host?(@game) ? @game.guest.name : @game.host.name
-    @user_wins = current_user.game_host?(@game) ? @game.host_wins : @game.guest_wins
-    @contrary_wins = current_user.game_host?(@game) ? @game.guest_wins : @game.host_wins
-  end
+  def play; end
 
   def make_move
     position = params.require(:position)

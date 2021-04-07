@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 
-const Score = ({ contrary_wins, contrary_name, user_wins }) => {
+const Score = ({ guest_wins, host_wins }) => {
   return (
     <div>
-      <p>Your wins: {user_wins}</p>
-      <p>
-        {contrary_name} wins: {contrary_wins}
-      </p>
+      <p>Host wins: {host_wins}</p>
+      <p>Guest wins: {guest_wins}</p>
     </div>
   );
 };

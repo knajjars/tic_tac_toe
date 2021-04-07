@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 import Square from '../components/game/Square';
+import Score from '../components/game/Score';
 
 const style = {
   border: '4px solid darkblue',
@@ -13,7 +14,7 @@ const style = {
   gridTemplate: 'repeat(3, 1fr) / repeat(3, 1fr)',
 };
 
-const Board = ({ value, user, game_id, player }) => {
+const Board = ({ value, user, game_id, player, guest_wins, host_wins }) => {
   const [gameStats, setGameStats] = useState({
     host_wins: 0,
     guest_wins: 0,
@@ -54,7 +55,6 @@ const Board = ({ value, user, game_id, player }) => {
 
   const markSquare = (square) => {
     if (square.value === '') {
-      console.log(gameStats.host_moves);
       gameStats.guest_moves.forEach((guest_move) => {
         if (guest_move === square.position) {
           const squaresClone = [...squares].map((clonedSquare) => {
@@ -82,14 +82,17 @@ const Board = ({ value, user, game_id, player }) => {
   };
 
   return (
-    <div style={style}>
-      {squares.map((square) => (
-        <Square
-          key={JSON.stringify(square.position)}
-          value={square.value}
-          onClick={onClick(square)}
-        />
-      ))}
+    <div>
+      <Score guest_wins={guest_wins} host_wins={host_wins} />
+      <div style={style}>
+        {squares.map((square) => (
+          <Square
+            key={JSON.stringify(square.position)}
+            value={square.value}
+            onClick={onClick(square)}
+          />
+        ))}
+      </div>
     </div>
   );
 };
