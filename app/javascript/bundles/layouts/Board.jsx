@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { cloneDeep } from 'lodash';
 
 import Square from '../components/game/Square';
 import Score from '../components/game/Score';
 import GameSessionChannel from '../../channels/game_session_channel';
+import { squaresSettings, gameSettings } from '../../libs/game';
 
 const style = {
   border: '4px solid darkblue',
@@ -16,75 +18,42 @@ const style = {
 };
 
 const Board = ({ value, user, game_id, player, guest_wins, host_wins }) => {
-  const [gameStats, setGameStats] = useState({
-    host_wins: 0,
-    guest_wins: 0,
-    guest_moves: [],
-    host_moves: [],
-  });
-
-  const [squares, setSquares] = useState([
-    { position: '00', value: '' },
-    { position: '01', value: '' },
-    { position: '02', value: '' },
-    { position: '10', value: '' },
-    { position: '11', value: '' },
-    { position: '12', value: '' },
-    { position: '20', value: '' },
-    { position: '21', value: '' },
-    { position: '22', value: '' },
-  ]);
+  const [gameStats, setGameStats] = useState(gameSettings);
+  const [squares, setSquares] = useState(squaresSettings);
 
   useEffect(() => {
-    GameSessionChannel(game_id).received = (data) =>
-      setGameStats(data.messages);
+    GameSessionChannel(game_id).received = (data) => {
+      setGameStats(data);
+    };
   }, []);
+
+  useEffect(() => {
+    markSquares();
+  }, [gameStats]);
 
   const onClick = (square) => async (e) => {
     e.preventDefault();
     const token = document.querySelector('[name=csrf-token]').content;
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
-    const { data } = await axios.post(`/games/${game_id}/make_move.json`, {
+    const { data } = await axios.post(`/games/${game_id}/make_move`, {
       player,
       position: square.position,
     });
-
-    // setGameStats({
-    //   host_wins: data.host_wins,
-    //   guest_wins: data.guest_wins,
-    //   guest_moves: data.guest_moves,
-    //   host_moves: data.host_moves,
-    // });
-
-    // markSquare(square);
   };
 
-  const markSquare = (square) => {
-    if (square.value === '') {
-      gameStats.guest_moves.forEach((guest_move) => {
-        if (guest_move === square.position) {
-          const squaresClone = [...squares].map((clonedSquare) => {
-            if (clonedSquare.position === square.position) {
-              clonedSquare.value = 'O';
-            }
-            return clonedSquare;
-          });
-          setSquares(squaresClone);
-        }
-      });
+  const markSquares = () => {
+    const squares = cloneDeep(squaresSettings);
+    gameStats.guest_moves.forEach((guest_move) => {
+      const square = squares.find((square) => square.position === guest_move);
+      square.value = 'X';
+    });
 
-      gameStats.host_moves.forEach((host_move) => {
-        if (host_move === square.position) {
-          const squaresClone = [...squares].map((clonedSquare) => {
-            if (clonedSquare.position === square.position) {
-              clonedSquare.value = 'X';
-            }
-            return clonedSquare;
-          });
-          setSquares(squaresClone);
-        }
-      });
-    }
+    gameStats.host_moves.forEach((host_move) => {
+      const square = squares.find((square) => square.position === host_move);
+      square.value = 'O';
+    });
+
+    setSquares(squares);
   };
 
   return (

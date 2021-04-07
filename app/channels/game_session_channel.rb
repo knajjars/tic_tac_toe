@@ -4,6 +4,6 @@ class GameSessionChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
+    Game.find(params[:game_id]).cleanup
   end
 end

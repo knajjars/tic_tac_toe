@@ -13,6 +13,12 @@ class Game < ApplicationRecord
     save!
   end
 
+  def cleanup
+    self.guest_moves = []
+    self.host_moves = []
+    save!
+  end
+
   private
 
   def can_make_move?(position)

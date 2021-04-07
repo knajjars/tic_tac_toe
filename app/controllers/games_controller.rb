@@ -42,7 +42,7 @@ class GamesController < ApplicationController
 
     @game.player_move player: player, position: position
 
-    GameSessionChannel.broadcast_to @game, @game
+    ActionCable.server.broadcast "game_session_channel_#{@game.id}", @game
 
     head :ok
   end
