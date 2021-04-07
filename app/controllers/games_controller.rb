@@ -69,7 +69,7 @@ class GamesController < ApplicationController
   end
 
   def set_player
-    return @player = 'host`' if current_user.game_host? @game
+    return @player = 'host' if current_user.game_host? @game
 
     @player = 'guest' if current_user.game_guest? @game
   end
