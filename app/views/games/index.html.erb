@@ -14,7 +14,7 @@
     <% @games.each do |game| %>
       <tr>
         <td><%= game.name %></td>
-        <td><%= link_to 'Join', game %></td>
+        <td><%= link_to 'Join', join_game_path(game) %></td>
       </tr>
     <% end %>
   </tbody>

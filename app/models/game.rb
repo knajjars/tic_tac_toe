@@ -3,8 +3,6 @@ class Game < ApplicationRecord
   belongs_to :guest, class_name: 'User', foreign_key: 'guest_id', optional: true
 
   validates :name, presence: true
-  validates :password, presence: true
-
   enum status: %i[settled in_progress]
 
   def player_move(player:, position:)

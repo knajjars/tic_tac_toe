@@ -19,7 +19,7 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
+        format.html { redirect_to games_path, notice: 'Game was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -27,13 +27,10 @@ class GamesController < ApplicationController
   end
 
   def join
-    provided_password = params.require(:password)
-
-    return redirect_to @game, alert: 'Wrong password.' if provided_password != @game.password
-
-    @game.guest = current_user
-    @game.save
-
+    unless current_user.game_host? @game
+      @game.guest = current_user
+      @game.save
+    end
     redirect_to play_game_path(@game)
   end
 
@@ -61,7 +58,7 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:name, :password)
+    params.require(:game).permit(:name)
   end
 
   def set_player

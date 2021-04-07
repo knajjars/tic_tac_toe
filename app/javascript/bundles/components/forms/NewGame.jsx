@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 const NewGame = (props) => {
   const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
 
   return (
     <div>
@@ -13,15 +12,6 @@ const NewGame = (props) => {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-
-      <label>Password to join room</label>
-      <input
-        type="text"
-        name="game[password]"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-
       <input type="submit" value="Create game" />
     </div>
   );
