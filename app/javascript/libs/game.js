@@ -14,4 +14,5 @@ export const gameSettings = {
   guest_wins: 0,
   guest_moves: [],
   host_moves: [],
+  player_turn: '',
 };

@@ -8,6 +8,10 @@ class Game < ApplicationRecord
 
   after_commit :notify_game_session
 
+  before_create do
+    self.player_turn = random_player
+  end
+
   def notify_game_session
     ActionCable.server.broadcast "game_session_channel_#{id}", self
   end
@@ -23,7 +27,9 @@ class Game < ApplicationRecord
     self.guest_wins += 1 if status[:guest_won]
     self.host_wins += 1 if status[:host_won]
 
-    cleanup if status[:game_finished]
+    self.player_turn = select_player
+
+    start_game if status[:game_finished]
 
     save!
   end
@@ -31,5 +37,12 @@ class Game < ApplicationRecord
   def cleanup
     self.guest_moves = []
     self.host_moves = []
+  end
+
+  private
+
+  def start_game
+    self.player_turn = random_player
+    cleanup
   end
 end

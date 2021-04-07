@@ -1,6 +1,16 @@
 module GameConcern
   extend ActiveSupport::Concern
 
+  def random_player
+    %i[guest host].sample
+  end
+
+  def select_player
+    return random_player if player_turn.nil?
+
+    player_turn == 'host' ? 'guest' : 'host'
+  end
+
   def win_combinations =
     [
       [0, 1, 2],

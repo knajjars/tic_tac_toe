@@ -19,13 +19,14 @@ const style = {
 };
 
 const Board = ({ value, user, game_id, player, game }) => {
-  const { guest_wins, host_wins, guest_moves, host_moves } = game;
+  const { guest_wins, host_wins, guest_moves, host_moves, player_turn } = game;
   const [gameStats, setGameStats] = useState({
     ...gameSettings,
     guest_wins,
     host_wins,
     guest_moves,
     host_moves,
+    player_turn,
   });
   const [squares, setSquares] = useState(squaresSettings);
 
@@ -45,6 +46,9 @@ const Board = ({ value, user, game_id, player, game }) => {
   }, [gameStats]);
 
   const onClick = (square) => async (e) => {
+    if (gameStats.player_turn !== player) {
+      return;
+    }
     e.preventDefault();
     const token = document.querySelector('[name=csrf-token]').content;
     axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
@@ -75,6 +79,7 @@ const Board = ({ value, user, game_id, player, game }) => {
         guest_wins={gameStats.guest_wins}
         host_wins={gameStats.host_wins}
         player={player}
+        player_turn={gameStats.player_turn}
       />
       <div style={style}>
         {squares.map((square) => (
