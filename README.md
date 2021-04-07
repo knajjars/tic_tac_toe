@@ -1,24 +1,17 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Tic Tac Toe
 
-Things you may want to cover:
+  
 
-* Ruby version
+## Used:
 
-* System dependencies
+- Ruby on Rails
+- ActionCable
+- React on Rails
+- Bootstrap
+- Devise
+- Heroku
 
-* Configuration
+Visit exampe [here](https://obscure-ridge-81166.herokuapp.com)
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![Game view](https://i.ibb.co/6DBgGD1/Screenshot-2021-04-07-at-16-31-28.png)
