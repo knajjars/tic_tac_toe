@@ -22,10 +22,9 @@ class Game < ApplicationRecord
 
     self.guest_wins += 1 if status[:guest_won]
     self.host_wins += 1 if status[:host_won]
+    save!
 
     cleanup if status[:game_finished]
-
-    save!
   end
 
   def cleanup
