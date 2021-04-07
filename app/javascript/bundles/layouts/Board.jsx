@@ -17,8 +17,15 @@ const style = {
   gridTemplate: 'repeat(3, 1fr) / repeat(3, 1fr)',
 };
 
-const Board = ({ value, user, game_id, player, guest_wins, host_wins }) => {
-  const [gameStats, setGameStats] = useState(gameSettings);
+const Board = ({ value, user, game_id, player, game }) => {
+  const { guest_wins, host_wins, guest_moves, host_moves } = game;
+  const [gameStats, setGameStats] = useState({
+    ...gameSettings,
+    guest_wins,
+    host_wins,
+    guest_moves,
+    host_moves,
+  });
   const [squares, setSquares] = useState(squaresSettings);
 
   useEffect(() => {

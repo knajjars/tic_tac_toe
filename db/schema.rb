@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 2021_04_06_214834) do
     t.bigint "guest_id"
     t.bigint "host_id"
     t.string "status"
-    t.string "guest_moves", default: [], array: true
-    t.string "host_moves", default: [], array: true
+    t.integer "guest_moves", default: [], array: true
+    t.integer "host_moves", default: [], array: true
     t.index ["guest_id"], name: "index_games_on_guest_id"
     t.index ["host_id"], name: "index_games_on_host_id"
   end
