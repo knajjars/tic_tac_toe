@@ -65,7 +65,10 @@ const Board = ({ value, user, game_id, player, game }) => {
 
   return (
     <div>
-      <Score guest_wins={guest_wins} host_wins={host_wins} />
+      <Score
+        guest_wins={gameStats.guest_wins}
+        host_wins={gameStats.host_wins}
+      />
       <div style={style}>
         {squares.map((square) => (
           <Square
