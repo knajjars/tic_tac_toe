@@ -42,13 +42,9 @@ class GamesController < ApplicationController
 
     @game.player_move player: player, position: position
 
-    respond_to do |format|
-      format.json do
-        render json: @game.as_json(
-          except: [:password]
-        )
-      end
-    end
+    GameSessionChannel.broadcast_to @game, @game
+
+    head :ok
   end
 
   private

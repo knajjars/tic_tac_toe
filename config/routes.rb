@@ -5,5 +5,8 @@ Rails.application.routes.draw do
     get :play, on: :member
     post :make_move, on: :member
   end
+
+  mount ActionCable.server => '/cable'
+
   root to: 'games#index'
 end

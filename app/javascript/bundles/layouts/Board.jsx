@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import Square from '../components/game/Square';
 import Score from '../components/game/Score';
+import GameSessionChannel from '../../channels/game_session_channel';
 
 const style = {
   border: '4px solid darkblue',
@@ -34,6 +35,11 @@ const Board = ({ value, user, game_id, player, guest_wins, host_wins }) => {
     { position: '22', value: '' },
   ]);
 
+  useEffect(() => {
+    GameSessionChannel(game_id).received = (data) =>
+      setGameStats(data.messages);
+  }, []);
+
   const onClick = (square) => async (e) => {
     e.preventDefault();
     const token = document.querySelector('[name=csrf-token]').content;
@@ -43,14 +49,14 @@ const Board = ({ value, user, game_id, player, guest_wins, host_wins }) => {
       position: square.position,
     });
 
-    setGameStats({
-      host_wins: data.host_wins,
-      guest_wins: data.guest_wins,
-      guest_moves: data.guest_moves,
-      host_moves: data.host_moves,
-    });
+    // setGameStats({
+    //   host_wins: data.host_wins,
+    //   guest_wins: data.guest_wins,
+    //   guest_moves: data.guest_moves,
+    //   host_moves: data.host_moves,
+    // });
 
-    markSquare(square);
+    // markSquare(square);
   };
 
   const markSquare = (square) => {
