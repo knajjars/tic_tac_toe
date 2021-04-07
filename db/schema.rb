@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 2021_04_06_214834) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "guest_id"
     t.bigint "host_id"
-    t.string "status"
     t.integer "guest_moves", default: [], array: true
     t.integer "host_moves", default: [], array: true
     t.index ["guest_id"], name: "index_games_on_guest_id"
