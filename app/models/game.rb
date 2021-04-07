@@ -5,7 +5,6 @@ class Game < ApplicationRecord
   belongs_to :guest, class_name: 'User', foreign_key: 'guest_id', optional: true
 
   validates :name, presence: true
-  enum status: %i[settled in_progress]
 
   after_commit :notify_game_session
 
@@ -19,12 +18,12 @@ class Game < ApplicationRecord
     guest_moves << position if player == 'guest'
     host_moves << position if player == 'host'
 
-    winner = get_winner
+    status = game_status
 
-    self.guest_wins += 1 if winner[:guest]
-    self.host_wins += 1 if winner[:host]
+    self.guest_wins += 1 if status[:guest_won]
+    self.host_wins += 1 if status[:host_won]
 
-    cleanup if winner[:game_won]
+    cleanup if status[:game_finished]
 
     save!
   end
