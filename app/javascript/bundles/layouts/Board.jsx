@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-import Square from '../components/tic_tac_toe/Square';
+import Square from '../components/game/Square';
 
 const style = {
   border: '4px solid darkblue',
