@@ -14,4 +14,4 @@
 
 Visit exampe [here](https://obscure-ridge-81166.herokuapp.com)
 
-![Game view](https://i.ibb.co/vXht3Lg/Screenshot-2021-04-07-at-17-50-11.png)
+![Game view](https://i.ibb.co/nDGr5PL/Screenshot-2021-04-07-at-22-35-02.png)
