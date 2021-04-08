@@ -12,34 +12,12 @@ class Game < ApplicationRecord
     self.player_turn = random_player
   end
 
-  def notify_game_session
-    ActionCable.server.broadcast "game_session_channel_#{id}", self
-  end
-
-  def player_move(player:, position:)
-    return unless can_make_move?(position)
-
-    guest_moves << position if player == 'guest'
-    host_moves << position if player == 'host'
-
-    status = game_status
-
-    self.guest_wins += 1 if status[:guest_won]
-    self.host_wins += 1 if status[:host_won]
-
-    self.player_turn = select_player
-
-    start_game if status[:game_finished]
-
-    save!
-  end
+  private
 
   def cleanup
     self.guest_moves = []
     self.host_moves = []
   end
-
-  private
 
   def start_game
     self.player_turn = random_player

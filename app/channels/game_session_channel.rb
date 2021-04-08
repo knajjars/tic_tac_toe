@@ -3,7 +3,5 @@ class GameSessionChannel < ApplicationCable::Channel
     stream_from "game_session_channel_#{params[:game_id]}"
   end
 
-  def unsubscribed
-    Game.find(params[:game_id]).cleanup.save!
-  end
+  def unsubscribed; end
 end
