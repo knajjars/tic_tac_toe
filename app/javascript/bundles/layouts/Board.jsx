@@ -13,7 +13,7 @@ const style = {
   borderRadius: '10px',
   width: '350px',
   height: '350px',
-  margin: '0 auto',
+  margin: '16px auto',
   display: 'grid',
   gridTemplate: 'repeat(3, 1fr) / repeat(3, 1fr)',
 };
@@ -74,7 +74,7 @@ const Board = ({ value, user, game_id, player, game }) => {
   };
 
   return (
-    <div>
+    <div className="d-flex flex-lg-row flex-column align-items-center justify-content-center mb-3">
       <Score
         guest_wins={gameStats.guest_wins}
         host_wins={gameStats.host_wins}
